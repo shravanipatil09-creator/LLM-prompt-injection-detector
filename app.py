@@ -1,21 +1,15 @@
 import streamlit as st
 
-# =========================================================
-# 1. PAGE CONFIGURATION
-# =========================================================
-
 st.set_page_config(
     page_title="LLM Prompt Injection Detector",
     layout="wide"
 )
 
-
-# =========================================================
-# 2. CORE SCANNING LOGIC
-# =========================================================
+# =========================
+# DETECTOR LOGIC
+# =========================
 
 def check_prompt(prompt):
-
     if not prompt.strip():
         return (
             "⚠️ Empty Input",
@@ -33,92 +27,73 @@ def check_prompt(prompt):
     ]
 
     found_keywords = [
-        word
-        for word in jailbreak_keywords
+        word for word in jailbreak_keywords
         if word in prompt.lower()
     ]
 
     if found_keywords:
-
         return (
             "RISK DETECTED [HIGH RISK]",
-            f"Prompt blocked! The system detected malicious keywords trying to hijack the LLM: {', '.join(found_keywords)}"
+            f"Prompt blocked! The system detected malicious keywords "
+            f"trying to hijack the LLM: {', '.join(found_keywords)}"
         )
-
     else:
-
         return (
             "SAFE [VERIFIED]",
-            "This prompt is safe and clean. It is safe to pass this input to the primary LLM model."
+            "This prompt is safe and clean. It is safe to pass this input "
+            "to the primary LLM model."
         )
 
 
-# =========================================================
-# 3. DYNAMIC NEON CSS
-# =========================================================
+# =========================
+# CYBER UI CSS
+# =========================
 
 dynamic_neon_css = """
-
 <style>
 
-/* =====================================================
-   JET BLACK BACKGROUND
-   ===================================================== */
+/* =========================
+   MAIN BACKGROUND
+   ========================= */
 
 .stApp,
 [data-testid="stAppViewContainer"],
 [data-testid="stHeader"] {
-
-    background-color: #000000 !important;
-
-    background: #000000 !important;
-
-    background-image:
-        radial-gradient(
-            circle at 50% -20%,
-            rgba(127, 0, 255, 0.28) 0%,
-            rgba(255, 0, 127, 0.15) 40%,
-            transparent 80%
-        ),
-        radial-gradient(
-            rgba(255, 255, 255, 0.15) 1px,
-            transparent 1px
-        ),
-        radial-gradient(
-            rgba(255, 255, 255, 0.1) 1px,
-            transparent 1px
-        ) !important;
-
-    background-size:
-        100% 100%,
-        40px 40px,
-        90px 90px !important;
-
-    background-position:
-        0 0,
-        0 0,
-        20px 20px !important;
-
-    background-attachment: fixed !important;
-
-    color: #ffffff !important;
+    background:
+        radial-gradient(circle at 15% 20%,
+            rgba(127, 0, 255, 0.18),
+            transparent 28%),
+        radial-gradient(circle at 85% 30%,
+            rgba(255, 0, 127, 0.14),
+            transparent 30%),
+        radial-gradient(circle at 50% 90%,
+            rgba(0, 229, 255, 0.08),
+            transparent 25%),
+        #020204 !important;
 }
 
 
-/* =====================================================
-   BIG 4-LINE CYBER HEADING
-   ===================================================== */
+/* =========================
+   TITLE
+   ========================= */
 
 .cyber-title {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 15px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #ff007f,
-            #7f00ff,
-            #00e5ff,
-            #ff007f
-        );
+    font-size: 5.2em;
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: 5px;
+
+    background: linear-gradient(
+        90deg,
+        #ff007f,
+        #7f00ff,
+        #00e5ff,
+        #ff007f
+    );
 
     background-size: 250% auto;
 
@@ -127,315 +102,223 @@ dynamic_neon_css = """
 
     animation: textShine 3s linear infinite;
 
-    font-weight: 900 !important;
-
-    text-align: center;
-
-    font-size: 5.2em !important;
-
-    line-height: 1.0 !important;
-
-    letter-spacing: 5px;
-
     filter:
-        drop-shadow(
-            0 4px 25px rgba(127, 0, 255, 0.7)
-        );
-
-    margin-top: 5px !important;
-
-    margin-bottom: 15px !important;
+        drop-shadow(0 0 8px rgba(127, 0, 255, 0.7))
+        drop-shadow(0 0 18px rgba(255, 0, 127, 0.35));
 }
 
 
 @keyframes textShine {
-
-    to {
-        background-position: 200% center;
+    0% {
+        background-position: 0% center;
     }
 
+    100% {
+        background-position: 250% center;
+    }
 }
 
 
-/* =====================================================
-   SUBTITLE
-   ===================================================== */
+/* =========================
+   SUB TITLE
+   ========================= */
 
 .cyber-sub-text {
+    text-align: center;
 
-    background:
-        linear-gradient(
-            90deg,
-            #7f00ff,
-            #ff007f,
-            #7f00ff
-        );
+    font-size: 1.05em;
+    font-weight: 600;
 
-    background-size: 200% auto;
+    background: linear-gradient(
+        90deg,
+        #ff007f,
+        #b000ff,
+        #00e5ff
+    );
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    animation: textShine 4s linear infinite;
+    margin-bottom: 35px;
 
-    text-align: center;
-
-    font-size: 1.15em !important;
-
-    font-weight: 600 !important;
-
-    filter:
-        drop-shadow(
-            0 2px 10px rgba(255, 0, 127, 0.3)
-        );
-
-    margin-top: 5px !important;
-
-    margin-bottom: 25px !important;
+    text-shadow:
+        0 0 8px rgba(127, 0, 255, 0.5);
 }
 
 
-/* =====================================================
-   PROMPT BOX - ROTATING NEON LIGHT
-   ===================================================== */
+/* =========================
+   SELECT BOX
+   ========================= */
+
+div[data-baseweb="select"] > div {
+    background: #08000f !important;
+
+    border: 1px solid #7f00ff !important;
+
+    border-radius: 10px !important;
+
+    box-shadow:
+        0 0 8px rgba(127, 0, 255, 0.5),
+        inset 0 0 10px rgba(127, 0, 255, 0.08) !important;
+
+    color: white !important;
+}
+
+
+/* =========================
+   PROMPT TEXT AREA
+   STEADY NEON BORDER
+   ========================= */
 
 div[data-testid="stTextArea"] {
+    background: #08000f !important;
 
-    position: relative !important;
+    border: 2px solid #b000ff !important;
 
     border-radius: 15px !important;
 
-    padding: 4px !important;
-
-    background:
-        conic-gradient(
-            from 0deg,
-            #12001f,
-            #12001f,
-            #ff007f,
-            #7f00ff,
-            #00e5ff,
-            #7f00ff,
-            #ff007f,
-            #12001f,
-            #12001f
-        ) !important;
-
-    background-size: 100% 100% !important;
-
-    animation:
-        rotatingBorder 2.8s linear infinite;
-
     box-shadow:
-        0 0 12px rgba(255, 0, 127, 0.4),
-        0 0 25px rgba(127, 0, 255, 0.3);
+        0 0 6px rgba(255, 0, 127, 0.75),
+        0 0 15px rgba(127, 0, 255, 0.65),
+        0 0 28px rgba(127, 0, 255, 0.25) !important;
 
-    overflow: hidden !important;
+    padding: 3px !important;
+
+    /* IMPORTANT:
+       No animation
+       No rotation
+       Box remains completely steady
+    */
 }
 
 
-/* =====================================================
-   ROTATING LIGHT
-   ===================================================== */
+/* Actual textarea */
 
-@keyframes rotatingBorder {
-
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-
-}
-
-
-/* =====================================================
-   KEEP TEXTAREA STRAIGHT WHILE BORDER ROTATES
-   ===================================================== */
-
-div[data-testid="stTextArea"] > div {
-
+div[data-testid="stTextArea"] textarea {
     background: #08000f !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+
+    outline: none !important;
+
+    box-shadow: none !important;
 
     border-radius: 12px !important;
 
-    transform: rotate(0deg);
-
+    font-size: 16px !important;
 }
 
 
-/* =====================================================
-   TEXTAREA
-   ===================================================== */
+/* Placeholder */
 
-div[data-testid="stTextArea"] textarea {
+div[data-testid="stTextArea"] textarea::placeholder {
+    color: #9b8fa8 !important;
+}
 
-    background-color:
-        rgba(8, 0, 15, 0.98) !important;
 
-    color:
-        #ffffff !important;
+/* =========================
+   TEXT INPUT
+   ========================= */
 
-    border:
-        none !important;
+div[data-testid="stTextInput"] input {
+    background: #08000f !important;
 
-    border-radius:
-        11px !important;
+    color: #ffffff !important;
+
+    border: 1px solid #7f00ff !important;
+
+    border-radius: 10px !important;
 
     box-shadow:
-        none !important;
-
-    outline:
-        none !important;
+        0 0 8px rgba(127, 0, 255, 0.45) !important;
 }
 
 
-/* =====================================================
-   TEXTAREA LABEL
-   ===================================================== */
+/* =========================
+   ANALYSIS TEXT AREA
+   ========================= */
 
-div[data-testid="stTextArea"] label {
+div[data-testid="stTextArea"] textarea[disabled] {
+    color: #d8cce5 !important;
 
-    color:
-        #ffffff !important;
+    opacity: 1 !important;
 }
 
 
-/* =====================================================
-   OTHER INPUT FIELDS
-   ===================================================== */
-
-input[type="text"] {
-
-    background-color:
-        rgba(12, 8, 22, 0.95) !important;
-
-    color:
-        #ffffff !important;
-
-    border:
-        1.5px solid rgba(127, 0, 255, 0.5) !important;
-
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.8) !important;
-
-    border-radius:
-        12px !important;
-}
-
-
-/* =====================================================
-   SELECT BOX
-   ===================================================== */
-
-div[data-baseweb="select"] > div {
-
-    background-color:
-        rgba(12, 8, 22, 0.95) !important;
-
-    color:
-        #ffffff !important;
-
-    border:
-        1.5px solid rgba(127, 0, 255, 0.5) !important;
-
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.8) !important;
-
-    border-radius:
-        12px !important;
-}
-
-
-/* =====================================================
+/* =========================
    BUTTON
-   ===================================================== */
+   ========================= */
 
-div.stButton > button {
+.stButton > button {
+    width: 100%;
 
-    background:
-        #0d091a !important;
+    background: #08000f !important;
 
-    border:
-        2px solid #ff007f !important;
+    color: #ff4da6 !important;
 
-    color:
-        #ffffff !important;
+    border: 2px solid #ff007f !important;
 
-    font-weight:
-        800 !important;
+    border-radius: 10px !important;
 
-    font-size:
-        15px !important;
+    font-weight: 800 !important;
 
-    letter-spacing:
-        2px;
+    letter-spacing: 1px !important;
 
     box-shadow:
-        0 0 15px rgba(255, 0, 127, 0.4) !important;
+        0 0 8px rgba(255, 0, 127, 0.65),
+        0 0 18px rgba(127, 0, 255, 0.35) !important;
 
-    border-radius:
-        12px !important;
-
-    width:
-        100%;
-
-    transition:
-        all 0.4s ease-in-out;
+    transition: 0.25s ease;
 }
 
 
-div.stButton > button:hover {
+.stButton > button:hover {
+    background: #170020 !important;
 
-    border-color:
-        #7f00ff !important;
+    color: #ffffff !important;
+
+    border-color: #7f00ff !important;
 
     box-shadow:
-        0 0 25px rgba(127, 0, 255, 0.7) !important;
-
-    color:
-        #ff007f !important;
+        0 0 12px rgba(255, 0, 127, 0.8),
+        0 0 25px rgba(127, 0, 255, 0.65) !important;
 }
 
 
-/* =====================================================
+/* =========================
+   LABELS
+   ========================= */
+
+label {
+    color: #d9c8e8 !important;
+
+    font-weight: 600 !important;
+}
+
+
+/* =========================
    FOOTER
-   ===================================================== */
+   ========================= */
 
 .branding-footer {
+    text-align: center;
 
-    text-align:
-        center;
+    margin-top: 45px;
 
-    color:
-        rgba(255, 255, 255, 0.4) !important;
+    color: #9d91a8;
 
-    font-size:
-        0.95em !important;
+    font-size: 14px;
 
-    margin-top:
-        40px !important;
-
-    border-top:
-        1px solid rgba(127, 0, 255, 0.15) !important;
-
-    padding-top:
-        15px !important;
-
-    letter-spacing:
-        1px;
+    line-height: 1.7;
 }
 
 
 .branding-name {
+    color: #ffd700 !important;
 
-    color:
-        #ffd700 !important;
-
-    font-weight:
-        700 !important;
+    font-weight: 700;
 
     text-shadow:
         0 0 8px rgba(255, 215, 0, 0.8),
@@ -443,50 +326,36 @@ div.stButton > button:hover {
 }
 
 
-/* =====================================================
+/* =========================
    MOBILE
-   ===================================================== */
+   ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
 
     .cyber-title {
+        font-size: 3.2em;
 
-        font-size:
-            3.2em !important;
+        letter-spacing: 3px;
 
-        line-height:
-            1.05 !important;
-
-        letter-spacing:
-            3px !important;
-
+        margin-top: 15px;
     }
 
     .cyber-sub-text {
+        font-size: 0.9em;
 
-        font-size:
-            0.9em !important;
-
-        line-height:
-            1.5 !important;
-
+        padding: 0 10px;
     }
-
 }
 
 </style>
-
 """
 
-st.markdown(
-    dynamic_neon_css,
-    unsafe_allow_html=True
-)
+st.markdown(dynamic_neon_css, unsafe_allow_html=True)
 
 
-# =========================================================
-# 4. MAIN TITLE DASHBOARD INTERFACE
-# =========================================================
+# =========================
+# MAIN TITLE
+# =========================
 
 st.markdown(
     """
@@ -500,6 +369,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
+# =========================
+# SUBTITLE
+# =========================
+
 st.markdown(
     """
     <p class="cyber-sub-text">
@@ -511,9 +385,9 @@ st.markdown(
 )
 
 
-# =========================================================
-# ATTACK PRESETS DROPDOWN
-# =========================================================
+# =========================
+# PRESETS
+# =========================
 
 preset_option = st.selectbox(
     "Adversarial Attack Simulation Vectors (Presets):",
@@ -526,9 +400,9 @@ preset_option = st.selectbox(
 )
 
 
-# =========================================================
+# =========================
 # DEFAULT TEXT
-# =========================================================
+# =========================
 
 default_text = (
     ""
@@ -537,16 +411,16 @@ default_text = (
 )
 
 
-# =========================================================
-# TWO COLUMN LAYOUT
-# =========================================================
+# =========================
+# TWO COLUMNS
+# =========================
 
 col1, col2 = st.columns(2)
 
 
-# =========================================================
-# LEFT COLUMN
-# =========================================================
+# =========================
+# LEFT SIDE
+# =========================
 
 with col1:
 
@@ -562,9 +436,9 @@ with col1:
     )
 
 
-# =========================================================
-# RIGHT COLUMN
-# =========================================================
+# =========================
+# RIGHT SIDE
+# =========================
 
 with col2:
 
@@ -601,16 +475,15 @@ with col2:
         )
 
 
-# =========================================================
-# 6. CORPORATE IDENTITY FOOTER
-# =========================================================
+# =========================
+# FOOTER
+# =========================
 
 st.markdown(
     """
     <p class='branding-footer'>
         ⚙️ Core Security System<br>
-        Created by
-        <span class='branding-name'>Shravani Patil</span><br>
+        Created by <span class='branding-name'>Shravani Patil</span><br>
         LLM Model Protection
     </p>
     """,
