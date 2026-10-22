@@ -51,7 +51,7 @@ label, p, span, div[data-testid="stWidgetLabel"] p, .stMarkdown, .stSubheader {
     text-shadow: 0 0 8px rgba(127, 0, 255, 0.6) !important;
 }
 
-/* Header Text Shine Styling */
+/* Main Heading Color Gradient Animation - FORCED TO BE VERY LARGE */
 .cyber-title {
     background: linear-gradient(90deg, #ff007f, #7f00ff, #ff007f);
     background-size: 200% auto;
@@ -60,10 +60,12 @@ label, p, span, div[data-testid="stWidgetLabel"] p, .stMarkdown, .stSubheader {
     animation: textShine 3s linear infinite;
     font-weight: 800 !important;
     text-align: center;
-    font-size: 3em !important;
+    font-size: 2.8em !important; /* हेडिंगचा आकार मोठा केला आहे */
     letter-spacing: 1.5px;
-    filter: drop-shadow(0 4px 20px rgba(127, 0, 255, 0.6));
-    margin-bottom: 2px !important;
+    filter: drop-shadow(0 4px 20px rgba(127, 0, 255, 0.7));
+    margin-bottom: 5px !important;
+    margin-top: 15px !important;
+    line-height: 1.2 !important;
 }
 
 .cyber-sub-text {
@@ -73,7 +75,7 @@ label, p, span, div[data-testid="stWidgetLabel"] p, .stMarkdown, .stSubheader {
     -webkit-text-fill-color: transparent;
     animation: textShine 4s linear infinite;
     text-align: center;
-    font-size: 1.15em !important;
+    font-size: 1.05em !important;
     font-weight: 600 !important;
     filter: drop-shadow(0 2px 10px rgba(255, 0, 127, 0.3));
     margin-top: 5px !important;
@@ -141,7 +143,7 @@ div.stButton > button:hover {
 st.markdown(dynamic_neon_css, unsafe_allow_html=True)
 
 # 4. Main Title Dashboard Interface
-st.markdown('<h1 class="cyber-title">🛡️ LLM Prompt Injection Detector</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="cyber-title">🛡️ LLM PROMPT INJECTION DETECTOR</h1>', unsafe_allow_html=True)
 st.markdown('<p class="cyber-sub-text">⚡ Cyber Shield Mode: Defending enterprise Large Language Models against alignment hijacking in real-time.</p>', unsafe_allow_html=True)
 
 # Session State initialization for output tracking
