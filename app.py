@@ -51,21 +51,22 @@ label, p, span, div[data-testid="stWidgetLabel"] p, .stMarkdown, .stSubheader {
     text-shadow: 0 0 8px rgba(127, 0, 255, 0.6) !important;
 }
 
-/* Main Heading Color Gradient Animation - FORCED TO BE VERY LARGE */
+/* MAX GIANT HEADING OVERRIDE (Forced 4.5em Ultra Bold) */
 .cyber-title {
-    background: linear-gradient(90deg, #ff007f, #7f00ff, #ff007f);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textShine 3s linear infinite;
-    font-weight: 800 !important;
-    text-align: center;
-    font-size: 2.8em !important; /* हेडिंगचा आकार मोठा केला आहे */
-    letter-spacing: 1.5px;
-    filter: drop-shadow(0 4px 20px rgba(127, 0, 255, 0.7));
+    background: linear-gradient(90deg, #ff007f, #7f00ff, #ff007f) !important;
+    background-size: 200% auto !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    animation: textShine 3s linear infinite !important;
+    font-weight: 900 !important; /* कमाल जाडी (Ultra Bold) */
+    text-align: center !important;
+    font-size: 4.5em !important; /* महाकाय मोठा आकार */
+    letter-spacing: 2px !important;
+    filter: drop-shadow(0 4px 25px rgba(127, 0, 255, 0.8)) !important;
     margin-bottom: 5px !important;
-    margin-top: 15px !important;
-    line-height: 1.2 !important;
+    margin-top: 20px !important;
+    line-height: 1.1 !important;
+    display: block !important;
 }
 
 .cyber-sub-text {
@@ -75,11 +76,11 @@ label, p, span, div[data-testid="stWidgetLabel"] p, .stMarkdown, .stSubheader {
     -webkit-text-fill-color: transparent;
     animation: textShine 4s linear infinite;
     text-align: center;
-    font-size: 1.05em !important;
+    font-size: 1.1em !important;
     font-weight: 600 !important;
     filter: drop-shadow(0 2px 10px rgba(255, 0, 127, 0.3));
     margin-top: 5px !important;
-    margin-bottom: 25px !important;
+    margin-bottom: 30px !important;
 }
 
 @keyframes textShine {
