@@ -39,14 +39,12 @@ def check_prompt(prompt):
     ]
 
     if found_keywords:
-
         return (
             "RISK DETECTED [HIGH RISK]",
             f"Prompt blocked! The system detected malicious keywords trying to hijack the LLM: {', '.join(found_keywords)}"
         )
 
     else:
-
         return (
             "SAFE [VERIFIED]",
             "This prompt is safe and clean. It is safe to pass this input to the primary LLM model."
@@ -54,7 +52,7 @@ def check_prompt(prompt):
 
 
 # =========================================================
-# 3. DYNAMIC NEON CSS
+# 3. DYNAMIC SHIFTING JET-BLACK & NEON CSS
 # =========================================================
 
 dynamic_neon_css = """
@@ -71,7 +69,9 @@ dynamic_neon_css = """
 
     background-color: #000000 !important;
 
-    background:
+    background: #000000 !important;
+
+    background-image:
         radial-gradient(
             circle at 50% -20%,
             rgba(127, 0, 255, 0.28) 0%,
@@ -104,7 +104,7 @@ dynamic_neon_css = """
 
 
 /* =====================================================
-   HEADER TEXT
+   HEADER TEXT SHINE
    ===================================================== */
 
 .cyber-title {
@@ -114,7 +114,6 @@ dynamic_neon_css = """
             90deg,
             #ff007f,
             #7f00ff,
-            #00e5ff,
             #ff007f
         );
 
@@ -186,14 +185,13 @@ dynamic_neon_css = """
 
 
 /* =====================================================
-   PROMPT BOX — ROTATING NEON LIGHT
+   PROMPT BOX - ROTATING NEON LIGHT
    ===================================================== */
 
 /*
-   हा मुख्य बदल आहे.
-
-   Box च्या border वर एक bright light
-   सतत clockwise फिरत राहील.
+   IMPORTANT:
+   Prompt box chya border var bright light
+   continuously clockwise firte.
 */
 
 div[data-testid="stTextArea"] {
@@ -202,149 +200,186 @@ div[data-testid="stTextArea"] {
 
     border-radius: 15px !important;
 
-    padding: 3px !important;
-
-    background: #08000f !important;
-
-    overflow: visible !important;
-
-    z-index: 1 !important;
-
-}
-
-
-/* Rotating light layer */
-
-div[data-testid="stTextArea"]::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-
-    border-radius: 17px;
+    padding: 4px !important;
 
     background:
         conic-gradient(
             from 0deg,
+            #12001f,
+            #12001f,
+            #12001f,
+            #12001f,
+            #ff007f,
+            #ff007f,
+            #7f00ff,
+            #00e5ff,
+            #7f00ff,
+            #ff007f,
+            #12001f,
+            #12001f,
+            #12001f
+        ) !important;
 
-            transparent 0deg,
-            transparent 245deg,
-
-            #ff007f 265deg,
-            #ff007f 280deg,
-
-            #7f00ff 292deg,
-            #00e5ff 305deg,
-
-            transparent 325deg,
-            transparent 360deg
-        );
+    background-size: 100% 100% !important;
 
     animation:
-        rotateNeonLight 2.5s linear infinite;
+        rotatingBorder 2.8s linear infinite;
 
-    z-index: -1;
+    box-shadow:
+        0 0 12px rgba(255, 0, 127, 0.35),
+        0 0 25px rgba(127, 0, 255, 0.25);
 
-    filter:
-        drop-shadow(0 0 5px #ff007f)
-        drop-shadow(0 0 12px #7f00ff)
-        drop-shadow(0 0 18px #00e5ff);
-
-}
-
-
-/* Inner dark layer */
-
-div[data-testid="stTextArea"]::after {
-
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    border-radius: 13px;
-
-    background: #08000f;
-
-    z-index: -1;
-
-}
-
-
-/* Rotating animation */
-
-@keyframes rotateNeonLight {
-
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-
+    overflow: hidden !important;
 }
 
 
 /* =====================================================
-   TEXTAREA
+   ROTATING BORDER ANIMATION
+   ===================================================== */
+
+@keyframes rotatingBorder {
+
+    0% {
+        background:
+            conic-gradient(
+                from 0deg,
+                #ff007f,
+                #7f00ff,
+                #00e5ff,
+                #12001f,
+                #12001f,
+                #12001f
+            );
+    }
+
+    25% {
+        background:
+            conic-gradient(
+                from 90deg,
+                #ff007f,
+                #7f00ff,
+                #00e5ff,
+                #12001f,
+                #12001f,
+                #12001f
+            );
+    }
+
+    50% {
+        background:
+            conic-gradient(
+                from 180deg,
+                #ff007f,
+                #7f00ff,
+                #00e5ff,
+                #12001f,
+                #12001f,
+                #12001f
+            );
+    }
+
+    75% {
+        background:
+            conic-gradient(
+                from 270deg,
+                #ff007f,
+                #7f00ff,
+                #00e5ff,
+                #12001f,
+                #12001f,
+                #12001f
+            );
+    }
+
+    100% {
+        background:
+            conic-gradient(
+                from 360deg,
+                #ff007f,
+                #7f00ff,
+                #00e5ff,
+                #12001f,
+                #12001f,
+                #12001f
+            );
+    }
+}
+
+
+/* =====================================================
+   ACTUAL TEXTAREA
    ===================================================== */
 
 div[data-testid="stTextArea"] textarea {
 
     background-color:
-        rgba(8, 0, 15, 0.97) !important;
+        rgba(8, 0, 15, 0.98) !important;
 
-    color: #ffffff !important;
-
-    border:
-        1px solid rgba(127, 0, 255, 0.35) !important;
-
-    box-shadow:
-        inset 0 0 20px rgba(127, 0, 255, 0.08) !important;
-
-    border-radius: 12px !important;
-
-    position: relative !important;
-
-    z-index: 2 !important;
-
-}
-
-
-/* Textarea focus */
-
-div[data-testid="stTextArea"] textarea:focus {
+    color:
+        #ffffff !important;
 
     border:
-        1px solid rgba(0, 229, 255, 0.35) !important;
+        none !important;
+
+    border-radius:
+        11px !important;
 
     box-shadow:
-        inset 0 0 20px rgba(0, 229, 255, 0.08),
-        0 0 10px rgba(127, 0, 255, 0.25) !important;
+        none !important;
 
+    position:
+        relative !important;
+
+    z-index:
+        2 !important;
 }
 
 
 /* =====================================================
-   SELECT BOX
+   TEXTAREA FOCUS
    ===================================================== */
 
-div[data-baseweb="select"] > div {
+div[data-testid="stTextArea"] textarea:focus {
+
+    border:
+        none !important;
+
+    outline:
+        none !important;
+
+    box-shadow:
+        none !important;
+}
+
+
+/* =====================================================
+   LABEL
+   ===================================================== */
+
+div[data-testid="stTextArea"] label {
+
+    color:
+        #ffffff !important;
+
+    position:
+        relative !important;
+
+    z-index:
+        3 !important;
+}
+
+
+/* =====================================================
+   OTHER INPUT FIELDS
+   ===================================================== */
+
+input[type="text"] {
 
     background-color:
         rgba(12, 8, 22, 0.95) !important;
 
-    color: #ffffff !important;
+    color:
+        #ffffff !important;
 
     border:
         1.5px solid rgba(127, 0, 255, 0.5) !important;
@@ -352,35 +387,50 @@ div[data-baseweb="select"] > div {
     box-shadow:
         0 4px 20px rgba(0, 0, 0, 0.8) !important;
 
-    border-radius: 12px !important;
+    border-radius:
+        12px !important;
+}
+
+
+textarea {
+
+    color:
+        #ffffff !important;
 }
 
 
 /* =====================================================
-   BUTTON
+   INTERCEPTOR BUTTON
    ===================================================== */
 
 div.stButton > button {
 
-    background: #0d091a !important;
+    background:
+        #0d091a !important;
 
     border:
         2px solid #ff007f !important;
 
-    color: #ffffff !important;
+    color:
+        #ffffff !important;
 
-    font-weight: 800 !important;
+    font-weight:
+        800 !important;
 
-    font-size: 15px !important;
+    font-size:
+        15px !important;
 
-    letter-spacing: 2px;
+    letter-spacing:
+        2px;
 
     box-shadow:
         0 0 15px rgba(255, 0, 127, 0.4) !important;
 
-    border-radius: 12px !important;
+    border-radius:
+        12px !important;
 
-    width: 100%;
+    width:
+        100%;
 
     transition:
         all 0.4s ease-in-out;
@@ -401,25 +451,36 @@ div.stButton > button:hover {
 
 
 /* =====================================================
-   STATUS / ANALYSIS BOXES
+   SELECT BOX
    ===================================================== */
 
-div[data-testid="stTextInput"] input,
-div[data-testid="stTextArea"] textarea {
+div[data-baseweb="select"] > div {
 
-    font-family:
-        "Courier New",
-        monospace !important;
+    background-color:
+        rgba(12, 8, 22, 0.95) !important;
+
+    color:
+        #ffffff !important;
+
+    border:
+        1.5px solid rgba(127, 0, 255, 0.5) !important;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.8) !important;
+
+    border-radius:
+        12px !important;
 }
 
 
 /* =====================================================
-   FOOTER
+   CORE SYSTEM SIGNATURE FOOTER
    ===================================================== */
 
 .branding-footer {
 
-    text-align: center;
+    text-align:
+        center;
 
     color:
         rgba(255, 255, 255, 0.4) !important;
@@ -450,8 +511,7 @@ div[data-testid="stTextArea"] textarea {
         700 !important;
 
     text-shadow:
-        0 0 8px rgba(255, 215, 0, 0.7),
-        0 0 18px rgba(255, 180, 0, 0.5);
+        0 0 8px rgba(255, 215, 0, 0.5);
 }
 
 
@@ -494,7 +554,7 @@ st.markdown(
 
 
 # =========================================================
-# 4. MAIN TITLE DASHBOARD
+# 4. MAIN TITLE DASHBOARD INTERFACE
 # =========================================================
 
 st.markdown(
@@ -509,7 +569,7 @@ st.markdown(
 
 
 # =========================================================
-# ATTACK PRESETS
+# ATTACK PRESETS DROPDOWN
 # =========================================================
 
 preset_option = st.selectbox(
@@ -524,7 +584,7 @@ preset_option = st.selectbox(
 
 
 # =========================================================
-# DEFAULT TEXT
+# ROUTE STATE CONDITIONS
 # =========================================================
 
 default_text = (
@@ -535,14 +595,14 @@ default_text = (
 
 
 # =========================================================
-# TWO COLUMN INTERFACE
+# TWO COLUMN LAYOUT
 # =========================================================
 
 col1, col2 = st.columns(2)
 
 
 # =========================================================
-# LEFT COLUMN — INPUT
+# LEFT COLUMN
 # =========================================================
 
 with col1:
@@ -560,7 +620,7 @@ with col1:
 
 
 # =========================================================
-# RIGHT COLUMN — RESULT
+# RIGHT COLUMN
 # =========================================================
 
 with col2:
