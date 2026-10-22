@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # =========================================================
-# DETECTOR
+# PROMPT DETECTOR
 # =========================================================
 
 def detect_prompt(prompt):
@@ -20,7 +20,7 @@ def detect_prompt(prompt):
     if not prompt.strip():
         return (
             "EMPTY",
-            "⚠️ Please enter a prompt to scan.",
+            "⚠️ PLEASE ENTER A PROMPT TO SCAN.",
             [],
             "WAITING"
         )
@@ -44,680 +44,820 @@ def detect_prompt(prompt):
             found_keywords.append(keyword)
 
     if found_keywords:
-
         return (
             "HIGH RISK",
-            "🚨 Prompt injection pattern detected. The request has been blocked.",
+            "🚨 PROMPT INJECTION PATTERN DETECTED. THE REQUEST HAS BEEN BLOCKED.",
             found_keywords,
             "BLOCKED"
         )
 
-    else:
-
-        return (
-            "SAFE",
-            "✅ No known prompt injection pattern detected.",
-            [],
-            "ALLOWED"
-        )
+    return (
+        "SAFE",
+        "✅ NO KNOWN PROMPT INJECTION PATTERN DETECTED.",
+        [],
+        "ALLOWED"
+    )
 
 
 # =========================================================
-# NEON CSS
+# COMPLETE NEON CSS
 # =========================================================
 
-st.markdown(
-    """
-    <style>
+st.markdown("""
+<style>
 
-    /* =====================================================
-       MAIN BACKGROUND
-       ===================================================== */
+/* =======================================================
+   MAIN APP
+   ======================================================= */
 
-    .stApp {
-        background:
-            radial-gradient(
-                circle at 20% 10%,
-                rgba(127, 0, 255, 0.18),
-                transparent 30%
-            ),
-            radial-gradient(
-                circle at 80% 80%,
-                rgba(255, 0, 128, 0.12),
-                transparent 30%
-            ),
-            linear-gradient(
-                135deg,
-                #030008,
-                #090014,
-                #05000a
-            );
+.stApp {
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(127, 0, 255, 0.20),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(255, 0, 128, 0.14),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #030008 0%,
+            #090014 50%,
+            #05000a 100%
+        );
 
-        color: white;
+    color: white;
+}
+
+
+/* =======================================================
+   MAIN CONTAINER
+   ======================================================= */
+
+.block-container {
+    max-width: 1150px;
+    padding-top: 25px;
+    padding-bottom: 40px;
+}
+
+
+/* =======================================================
+   MAIN TITLE
+   ======================================================= */
+
+.main-title {
+    text-align: center;
+
+    font-size: 42px;
+    line-height: 1.08;
+
+    font-weight: 1000;
+
+    letter-spacing: 5px;
+
+    margin-top: 10px;
+    margin-bottom: 18px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff00cc,
+            #9b30ff,
+            #00e5ff,
+            #ff00cc
+        );
+
+    background-size: 300% auto;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: titleAnimation 5s linear infinite;
+
+    filter:
+        drop-shadow(0 0 8px rgba(255,0,204,0.55))
+        drop-shadow(0 0 18px rgba(127,0,255,0.35));
+}
+
+
+@keyframes titleAnimation {
+
+    0% {
+        background-position: 0% center;
     }
 
+    50% {
+        background-position: 100% center;
+    }
 
-    /* =====================================================
-       REMOVE STREAMLIT DEFAULT TOP SPACE
-       ===================================================== */
+    100% {
+        background-position: 0% center;
+    }
+
+}
+
+
+/* =======================================================
+   SUBTITLE
+   ======================================================= */
+
+.subtitle {
+    text-align: center;
+
+    color: #c8b5ff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 38px;
+
+    text-shadow:
+        0 0 8px rgba(138,43,226,0.8);
+}
+
+
+/* =======================================================
+   SECTION TITLE
+   ======================================================= */
+
+.section-title {
+    color: #00e5ff;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+
+    text-shadow:
+        0 0 8px #00e5ff,
+        0 0 18px rgba(0,229,255,0.4);
+}
+
+
+/* =======================================================
+   SELECT BOX
+   ======================================================= */
+
+div[data-baseweb="select"] > div {
+
+    background: #08000f !important;
+
+    border: 1px solid #8a2be2 !important;
+
+    border-radius: 14px !important;
+
+    color: white !important;
+
+    box-shadow:
+        0 0 12px rgba(127,0,255,0.4);
+
+}
+
+
+/* =======================================================
+   PROMPT INPUT OUTER NEON
+   ======================================================= */
+
+div[data-testid="stTextArea"] {
+
+    border-radius: 20px;
+
+    padding: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff0080,
+            #8a2be2,
+            #00e5ff,
+            #8a2be2,
+            #ff0080
+        );
+
+    background-size: 400% 400%;
+
+    animation:
+        promptNeon 4s linear infinite;
+
+    box-shadow:
+        0 0 12px rgba(255,0,128,0.5),
+        0 0 30px rgba(127,0,255,0.35);
+}
+
+
+@keyframes promptNeon {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+}
+
+
+/* =======================================================
+   TEXT AREA
+   ======================================================= */
+
+div[data-testid="stTextArea"] textarea {
+
+    background: #07000d !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+
+    border-radius: 17px !important;
+
+    font-size: 16px !important;
+
+    padding: 18px !important;
+
+    caret-color: #00e5ff !important;
+
+}
+
+
+div[data-testid="stTextArea"] textarea::placeholder {
+
+    color: rgba(255,255,255,0.35) !important;
+
+}
+
+
+/* =======================================================
+   SCAN BUTTON
+   ======================================================= */
+
+.stButton > button {
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff007f,
+            #9b00ff,
+            #00cfff
+        );
+
+    background-size: 200% auto;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 0 15px rgba(255,0,128,0.5),
+        0 0 25px rgba(127,0,255,0.35);
+
+    transition: 0.3s;
+
+}
+
+
+.stButton > button:hover {
+
+    background-position: right center;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 25px rgba(0,229,255,0.7),
+        0 0 45px rgba(127,0,255,0.5);
+
+}
+
+
+/* =======================================================
+   DASHBOARD CARDS
+   ======================================================= */
+
+.dashboard-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(20,0,38,0.96),
+            rgba(5,0,15,0.99)
+        );
+
+    border: 1px solid #792cff;
+
+    border-radius: 18px;
+
+    padding: 25px 12px;
+
+    text-align: center;
+
+    min-height: 125px;
+
+    box-shadow:
+        0 0 12px rgba(127,0,255,0.45),
+        inset 0 0 25px rgba(127,0,255,0.07);
+
+}
+
+
+/* =======================================================
+   CARD LABEL
+   ======================================================= */
+
+.card-label {
+
+    color: #c0a8ff;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 2.5px;
+
+    margin-bottom: 14px;
+
+}
+
+
+/* =======================================================
+   CARD VALUE
+   ======================================================= */
+
+.card-value {
+
+    color: #00e5ff;
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-shadow:
+        0 0 8px #00e5ff,
+        0 0 18px rgba(0,229,255,0.5);
+
+}
+
+
+/* =======================================================
+   HIGH RISK
+   ======================================================= */
+
+.risk-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(75,0,25,0.96),
+            rgba(20,0,10,0.99)
+        );
+
+    border: 1px solid #ff0066;
+
+    border-radius: 20px;
+
+    padding: 30px 18px;
+
+    margin-top: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 0 15px rgba(255,0,102,0.65),
+        inset 0 0 25px rgba(255,0,102,0.08);
+
+}
+
+
+.risk-title {
+
+    color: #ff3b88;
+
+    font-size: 28px;
+
+    font-weight: 1000;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px #ff0066,
+        0 0 25px rgba(255,0,102,0.7);
+
+}
+
+
+.risk-message {
+
+    color: #ffd5e5;
+
+    font-size: 14px;
+
+    margin-top: 12px;
+
+}
+
+
+/* =======================================================
+   SAFE
+   ======================================================= */
+
+.safe-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,50,55,0.96),
+            rgba(0,12,18,0.99)
+        );
+
+    border: 1px solid #00e5ff;
+
+    border-radius: 20px;
+
+    padding: 30px 18px;
+
+    margin-top: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 0 15px rgba(0,229,255,0.55),
+        inset 0 0 25px rgba(0,229,255,0.07);
+
+}
+
+
+.safe-title {
+
+    color: #00e5ff;
+
+    font-size: 28px;
+
+    font-weight: 1000;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 10px #00e5ff,
+        0 0 25px rgba(0,229,255,0.6);
+
+}
+
+
+.safe-message {
+
+    color: #d5ffff;
+
+    font-size: 14px;
+
+    margin-top: 12px;
+
+}
+
+
+/* =======================================================
+   EMPTY
+   ======================================================= */
+
+.empty-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(45,30,0,0.95),
+            rgba(15,8,0,0.99)
+        );
+
+    border: 1px solid #ffd000;
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    margin-top: 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 0 15px rgba(255,208,0,0.4);
+
+}
+
+
+.empty-title {
+
+    color: #ffd000;
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =======================================================
+   ATTACK PATTERNS
+   ======================================================= */
+
+.keyword-title {
+
+    color: #ff00cc;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    margin-top: 25px;
+
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 0 10px rgba(255,0,204,0.7);
+
+}
+
+
+.keyword-container {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    justify-content: center;
+
+}
+
+
+.keyword-tag {
+
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    border: 1px solid #ff007f;
+
+    background:
+        rgba(255,0,127,0.12);
+
+    color: #ff72b5;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 0 10px rgba(255,0,127,0.25);
+
+}
+
+
+/* =======================================================
+   GOLDEN CREATOR FOOTER
+   ======================================================= */
+
+.branding-footer {
+
+    margin-top: 55px;
+
+    padding: 30px 15px;
+
+    text-align: center;
+
+    border: 1px solid rgba(255,193,7,0.6);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(25,12,0,0.98),
+            rgba(8,3,0,0.99)
+        );
+
+    box-shadow:
+        0 0 12px rgba(255,193,7,0.35),
+        0 0 30px rgba(255,193,7,0.12);
+
+}
+
+
+.creator-label {
+
+    color: #d8d8d8;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+}
+
+
+/* =======================================================
+   GOLDEN NAME
+   ======================================================= */
+
+.creator-name {
+
+    margin-top: 13px;
+
+    font-size: 30px;
+
+    font-weight: 1000;
+
+    letter-spacing: 4px;
+
+    color: #ffd700;
+
+    text-shadow:
+        0 0 5px #fff3a0,
+        0 0 10px #ffd700,
+        0 0 20px #ffb300,
+        0 0 35px rgba(255,179,0,0.85);
+
+    animation: goldenGlow 2s ease-in-out infinite alternate;
+
+}
+
+
+@keyframes goldenGlow {
+
+    from {
+
+        text-shadow:
+            0 0 5px #fff3a0,
+            0 0 10px #ffd700,
+            0 0 18px #ffb300;
+
+    }
+
+    to {
+
+        text-shadow:
+            0 0 8px #fff8c6,
+            0 0 18px #ffd700,
+            0 0 30px #ff9800,
+            0 0 45px rgba(255,179,0,0.8);
+
+    }
+
+}
+
+
+/* =======================================================
+   CREATOR ROLE
+   ======================================================= */
+
+.creator-role {
+
+    margin-top: 12px;
+
+    color: #00e5ff;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+
+    text-shadow:
+        0 0 8px rgba(0,229,255,0.8);
+
+}
+
+
+/* =======================================================
+   MOBILE
+   ======================================================= */
+
+@media (max-width: 700px) {
 
     .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        max-width: 1200px;
+
+        padding-top: 18px;
+        padding-left: 20px;
+        padding-right: 20px;
+
     }
 
-
-    /* =====================================================
-       MAIN TITLE
-       ===================================================== */
 
     .main-title {
-        text-align: center;
-        font-size: 42px;
-        font-weight: 900;
-        letter-spacing: 4px;
 
-        background:
-            linear-gradient(
-                90deg,
-                #ff00cc,
-                #8a2be2,
-                #00e5ff,
-                #ff00cc
-            );
+        font-size: 28px;
 
-        background-size: 300% auto;
+        line-height: 1.15;
 
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        animation: titleGlow 5s linear infinite;
-
-        text-shadow:
-            0 0 15px rgba(255,0,204,0.4);
-    }
-
-
-    @keyframes titleGlow {
-
-        0% {
-            background-position: 0% center;
-        }
-
-        50% {
-            background-position: 100% center;
-        }
-
-        100% {
-            background-position: 0% center;
-        }
-
-    }
-
-
-    /* =====================================================
-       SUBTITLE
-       ===================================================== */
-
-    .subtitle {
-        text-align: center;
-        color: #b8a0ff;
-
-        font-size: 14px;
         letter-spacing: 3px;
 
-        margin-top: 8px;
-        margin-bottom: 35px;
+        margin-top: 5px;
 
-        text-shadow:
-            0 0 8px rgba(138,43,226,0.8);
     }
 
 
-    /* =====================================================
-       SECTION TITLE
-       ===================================================== */
+    .subtitle {
+
+        font-size: 9px;
+
+        line-height: 1.6;
+
+        letter-spacing: 1.5px;
+
+    }
+
 
     .section-title {
 
-        color: #00e5ff;
-
-        font-size: 15px;
-        font-weight: 800;
-
-        letter-spacing: 3px;
-
-        margin-bottom: 10px;
-
-        text-shadow:
-            0 0 10px rgba(0,229,255,0.8);
-    }
-
-
-    /* =====================================================
-       PROMPT BOX
-       ===================================================== */
-
-    div[data-testid="stTextArea"] {
-
-        position: relative;
-
-        border-radius: 18px;
-
-        padding: 3px;
-
-        background:
-            linear-gradient(
-                90deg,
-                #ff00cc,
-                #8a2be2,
-                #00e5ff,
-                #8a2be2,
-                #ff00cc
-            );
-
-        background-size: 400% 400%;
-
-        animation: neonBorder 5s linear infinite;
-
-        box-shadow:
-            0 0 12px rgba(255,0,204,0.45),
-            0 0 30px rgba(138,43,226,0.25);
-    }
-
-
-    @keyframes neonBorder {
-
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background-position: 0% 50%;
-        }
-
-    }
-
-
-    div[data-testid="stTextArea"] textarea {
-
-        background: #08000f !important;
-
-        color: #ffffff !important;
-
-        border: none !important;
-
-        border-radius: 15px !important;
-
-        font-size: 16px !important;
-
-        padding: 18px !important;
-
-        caret-color: #00e5ff !important;
-    }
-
-
-    div[data-testid="stTextArea"] textarea:focus {
-
-        box-shadow:
-            inset 0 0 20px rgba(138,43,226,0.15),
-            0 0 15px rgba(0,229,255,0.3) !important;
-
-        outline: none !important;
-    }
-
-
-    /* =====================================================
-       SELECT BOX
-       ===================================================== */
-
-    div[data-baseweb="select"] > div {
-
-        background: #08000f !important;
-
-        border: 1px solid #7f00ff !important;
-
-        border-radius: 12px !important;
-
-        color: white !important;
-
-        box-shadow:
-            0 0 12px rgba(127,0,255,0.25);
-    }
-
-
-    /* =====================================================
-       BUTTON
-       ===================================================== */
-
-    .stButton > button {
-
-        width: 100%;
-
-        background:
-            linear-gradient(
-                90deg,
-                #ff007f,
-                #7f00ff,
-                #00cfff
-            );
-
-        background-size: 200% auto;
-
-        color: white;
-
-        border: none;
-
-        border-radius: 12px;
-
-        padding: 14px 20px;
-
-        font-size: 16px;
-
-        font-weight: 900;
+        font-size: 13px;
 
         letter-spacing: 2px;
 
-        transition: 0.3s;
-
-        box-shadow:
-            0 0 15px rgba(127,0,255,0.5);
-    }
-
-
-    .stButton > button:hover {
-
-        background-position: right center;
-
-        transform: translateY(-2px);
-
-        box-shadow:
-            0 0 25px rgba(0,229,255,0.7),
-            0 0 45px rgba(127,0,255,0.35);
-    }
-
-
-    /* =====================================================
-       DASHBOARD CARD
-       ===================================================== */
-
-    .dashboard-card {
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(20,0,35,0.95),
-                rgba(5,0,15,0.98)
-            );
-
-        border: 1px solid #7f00ff;
-
-        border-radius: 18px;
-
-        padding: 25px 15px;
-
-        text-align: center;
-
-        min-height: 130px;
-
-        box-shadow:
-            0 0 12px rgba(127,0,255,0.45),
-            inset 0 0 25px rgba(127,0,255,0.06);
     }
 
 
     .card-label {
 
-        color: #b8a0ff;
+        font-size: 10px;
 
-        font-size: 13px;
+        letter-spacing: 1.8px;
 
-        font-weight: 800;
-
-        letter-spacing: 3px;
-
-        margin-bottom: 15px;
     }
 
 
     .card-value {
 
-        color: #00e5ff;
+        font-size: 19px;
 
-        font-size: 25px;
-
-        font-weight: 900;
-
-        letter-spacing: 2px;
-
-        text-shadow:
-            0 0 10px rgba(0,229,255,0.8);
     }
 
 
-    /* =====================================================
-       HIGH RISK CARD
-       ===================================================== */
-
-    .risk-card {
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(70,0,20,0.95),
-                rgba(20,0,10,0.98)
-            );
-
-        border: 1px solid #ff0066;
-
-        border-radius: 18px;
-
-        padding: 28px;
-
-        margin-top: 25px;
-
-        text-align: center;
-
-        box-shadow:
-            0 0 15px rgba(255,0,102,0.6),
-            inset 0 0 30px rgba(255,0,102,0.08);
-    }
-
-
-    .risk-title {
-
-        color: #ff337f;
-
-        font-size: 30px;
-
-        font-weight: 900;
-
-        letter-spacing: 3px;
-
-        text-shadow:
-            0 0 12px #ff0066,
-            0 0 25px rgba(255,0,102,0.6);
-    }
-
-
-    .risk-message {
-
-        color: #ffd6e5;
-
-        font-size: 15px;
-
-        margin-top: 12px;
-    }
-
-
-    /* =====================================================
-       SAFE CARD
-       ===================================================== */
-
-    .safe-card {
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(0,50,50,0.95),
-                rgba(0,15,20,0.98)
-            );
-
-        border: 1px solid #00e5ff;
-
-        border-radius: 18px;
-
-        padding: 28px;
-
-        margin-top: 25px;
-
-        text-align: center;
-
-        box-shadow:
-            0 0 15px rgba(0,229,255,0.55),
-            inset 0 0 30px rgba(0,229,255,0.06);
-    }
-
-
+    .risk-title,
     .safe-title {
 
-        color: #00e5ff;
+        font-size: 22px;
 
-        font-size: 30px;
-
-        font-weight: 900;
-
-        letter-spacing: 3px;
-
-        text-shadow:
-            0 0 12px #00e5ff,
-            0 0 25px rgba(0,229,255,0.6);
-    }
-
-
-    .safe-message {
-
-        color: #d6ffff;
-
-        font-size: 15px;
-
-        margin-top: 12px;
-    }
-
-
-    /* =====================================================
-       EMPTY CARD
-       ===================================================== */
-
-    .empty-card {
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(40,30,0,0.9),
-                rgba(15,10,0,0.98)
-            );
-
-        border: 1px solid #ffcc00;
-
-        border-radius: 18px;
-
-        padding: 28px;
-
-        margin-top: 25px;
-
-        text-align: center;
-
-        box-shadow:
-            0 0 15px rgba(255,204,0,0.35);
-    }
-
-
-    .empty-title {
-
-        color: #ffcc00;
-
-        font-size: 25px;
-
-        font-weight: 900;
-
-        letter-spacing: 2px;
-    }
-
-
-    /* =====================================================
-       KEYWORD TAGS
-       ===================================================== */
-
-    .keyword-title {
-
-        color: #ff00cc;
-
-        font-size: 14px;
-
-        font-weight: 800;
-
-        letter-spacing: 3px;
-
-        margin-top: 25px;
-
-        margin-bottom: 12px;
-    }
-
-
-    .keyword-container {
-
-        display: flex;
-
-        flex-wrap: wrap;
-
-        gap: 10px;
-
-        justify-content: center;
-    }
-
-
-    .keyword-tag {
-
-        display: inline-block;
-
-        padding: 8px 14px;
-
-        border-radius: 20px;
-
-        border: 1px solid #ff007f;
-
-        background:
-            rgba(255,0,127,0.10);
-
-        color: #ff66aa;
-
-        font-size: 13px;
-
-        font-weight: 700;
-
-        box-shadow:
-            0 0 10px rgba(255,0,127,0.25);
-    }
-
-
-    /* =====================================================
-       FOOTER
-       ===================================================== */
-
-    .branding-footer {
-
-        margin-top: 50px;
-
-        padding: 28px 20px;
-
-        text-align: center;
-
-        border-top: 1px solid rgba(127,0,255,0.4);
-
-        border-radius: 18px;
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(15,0,30,0.95),
-                rgba(5,0,15,0.98)
-            );
-
-        box-shadow:
-            0 0 20px rgba(127,0,255,0.18);
-    }
-
-
-    .creator-label {
-
-        color: rgba(255,255,255,0.55);
-
-        font-size: 12px;
-
-        font-weight: 700;
-
-        letter-spacing: 4px;
     }
 
 
     .creator-name {
 
-        margin-top: 10px;
+        font-size: 24px;
 
-        font-size: 28px;
+        letter-spacing: 2px;
 
-        font-weight: 900;
+        white-space: nowrap;
 
-        letter-spacing: 4px;
-
-        color: #ff2bd6;
-
-        text-shadow:
-            0 0 8px #ff2bd6,
-            0 0 18px #8a2be2,
-            0 0 30px rgba(138,43,226,0.6);
     }
 
 
     .creator-role {
 
-        margin-top: 10px;
+        font-size: 9px;
 
-        color: #00e5ff;
-
-        font-size: 12px;
-
-        font-weight: 700;
-
-        letter-spacing: 3px;
-
-        text-shadow:
-            0 0 8px rgba(0,229,255,0.8);
-    }
-
-
-    /* =====================================================
-       MOBILE
-       ===================================================== */
-
-    @media (max-width: 700px) {
-
-        .main-title {
-            font-size: 27px;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
-            font-size: 10px;
-            letter-spacing: 2px;
-        }
-
-        .card-value {
-            font-size: 20px;
-        }
-
-        .risk-title,
-        .safe-title {
-            font-size: 23px;
-        }
-
-        .creator-name {
-            font-size: 22px;
-            letter-spacing: 3px;
-        }
+        letter-spacing: 1.5px;
 
     }
 
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 
 # =========================================================
@@ -726,26 +866,39 @@ st.markdown(
 
 st.markdown(
     """
-    <div class="main-title">
-        🛡️ LLM PROMPT INJECTION DETECTOR
-    </div>
+<div class="main-title">
+🛡️ LLM<br>
+PROMPT<br>
+INJECTION<br>
+DETECTOR
+</div>
+""",
+    unsafe_allow_html=True
+)
 
-    <div class="subtitle">
-        ⚡ CYBER SHIELD MODE • REAL-TIME LLM PROMPT DEFENSE
-    </div>
-    """,
+st.markdown(
+    """
+<div class="subtitle">
+⚡ CYBER SHIELD MODE • REAL-TIME LLM PROMPT DEFENSE
+</div>
+""",
     unsafe_allow_html=True
 )
 
 
 # =========================================================
-# PRESET PROMPTS
+# QUICK TEST PROMPT
 # =========================================================
 
 st.markdown(
-    '<div class="section-title">⚡ QUICK TEST PROMPT</div>',
+    """
+<div class="section-title">
+⚡ QUICK TEST PROMPT
+</div>
+""",
     unsafe_allow_html=True
 )
+
 
 preset = st.selectbox(
     "Choose a sample prompt",
@@ -759,7 +912,7 @@ preset = st.selectbox(
 
 
 # =========================================================
-# INPUT
+# PROMPT INPUT
 # =========================================================
 
 if preset == "Custom Prompt":
@@ -801,74 +954,53 @@ if scan:
         status, details, found_keywords, decision = detect_prompt(prompt)
 
 
-    # =====================================================
+    # -----------------------------------------------------
     # EMPTY
-    # =====================================================
+    # -----------------------------------------------------
 
     if status == "EMPTY":
 
         st.markdown(
             f"""
-            <div class="empty-card">
-
-                <div class="empty-title">
-                    ⚠️ EMPTY INPUT
-                </div>
-
-                <div class="risk-message">
-                    {details}
-                </div>
-
-            </div>
-            """,
+<div class="empty-card">
+<div class="empty-title">⚠️ EMPTY INPUT</div>
+<div class="risk-message">{details}</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
 
-    # =====================================================
+    # -----------------------------------------------------
     # HIGH RISK
-    # =====================================================
+    # -----------------------------------------------------
 
     elif status == "HIGH RISK":
 
         st.markdown(
             f"""
-            <div class="risk-card">
-
-                <div class="risk-title">
-                    🚨 HIGH RISK DETECTED
-                </div>
-
-                <div class="risk-message">
-                    {details}
-                </div>
-
-            </div>
-            """,
+<div class="risk-card">
+<div class="risk-title">🚨 HIGH RISK DETECTED</div>
+<div class="risk-message">{details}</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
 
-    # =====================================================
+    # -----------------------------------------------------
     # SAFE
-    # =====================================================
+    # -----------------------------------------------------
 
     else:
 
         st.markdown(
             f"""
-            <div class="safe-card">
-
-                <div class="safe-title">
-                    🟢 SAFE [VERIFIED]
-                </div>
-
-                <div class="safe-message">
-                    {details}
-                </div>
-
-            </div>
-            """,
+<div class="safe-card">
+<div class="safe-title">🟢 SAFE [VERIFIED]</div>
+<div class="safe-message">{details}</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
@@ -882,6 +1014,7 @@ if scan:
         unsafe_allow_html=True
     )
 
+
     col1, col2, col3 = st.columns(3)
 
 
@@ -890,26 +1023,25 @@ if scan:
     with col1:
 
         if status == "HIGH RISK":
+
             threat = "HIGH"
+
         elif status == "SAFE":
+
             threat = "LOW"
+
         else:
+
             threat = "—"
+
 
         st.markdown(
             f"""
-            <div class="dashboard-card">
-
-                <div class="card-label">
-                    THREAT LEVEL
-                </div>
-
-                <div class="card-value">
-                    {threat}
-                </div>
-
-            </div>
-            """,
+<div class="dashboard-card">
+<div class="card-label">THREAT LEVEL</div>
+<div class="card-value">{threat}</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
@@ -920,71 +1052,59 @@ if scan:
 
         st.markdown(
             f"""
-            <div class="dashboard-card">
-
-                <div class="card-label">
-                    PATTERNS DETECTED
-                </div>
-
-                <div class="card-value">
-                    {len(found_keywords)}
-                </div>
-
-            </div>
-            """,
+<div class="dashboard-card">
+<div class="card-label">PATTERNS DETECTED</div>
+<div class="card-value">{len(found_keywords)}</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
 
-    # DECISION
+    # DEFENSE MODE
 
     with col3:
 
         st.markdown(
             f"""
-            <div class="dashboard-card">
-
-                <div class="card-label">
-                    DEFENSE MODE
-                </div>
-
-                <div class="card-value">
-                    {decision}
-                </div>
-
-            </div>
-            """,
+<div class="dashboard-card">
+<div class="card-label">DEFENSE MODE</div>
+<div class="card-value">{decision}</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
 
     # =====================================================
-    # DETECTED PATTERNS
+    # DETECTED ATTACK PATTERNS
     # =====================================================
 
     if found_keywords:
 
         st.markdown(
-            '<div class="keyword-title">🔎 DETECTED ATTACK PATTERNS</div>',
+            """
+<div class="keyword-title">
+🔎 DETECTED ATTACK PATTERNS
+</div>
+""",
             unsafe_allow_html=True
         )
+
 
         tags = ""
 
         for keyword in found_keywords:
 
-            tags += f"""
-            <span class="keyword-tag">
-                {keyword}
-            </span>
-            """
+            tags += f'<span class="keyword-tag">{keyword}</span>'
+
 
         st.markdown(
             f"""
-            <div class="keyword-container">
-                {tags}
-            </div>
-            """,
+<div class="keyword-container">
+{tags}
+</div>
+""",
             unsafe_allow_html=True
         )
 
@@ -1000,6 +1120,7 @@ else:
         unsafe_allow_html=True
     )
 
+
     col1, col2, col3 = st.columns(3)
 
 
@@ -1007,18 +1128,11 @@ else:
 
         st.markdown(
             """
-            <div class="dashboard-card">
-
-                <div class="card-label">
-                    THREAT LEVEL
-                </div>
-
-                <div class="card-value">
-                    READY
-                </div>
-
-            </div>
-            """,
+<div class="dashboard-card">
+<div class="card-label">THREAT LEVEL</div>
+<div class="card-value">READY</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
@@ -1027,18 +1141,11 @@ else:
 
         st.markdown(
             """
-            <div class="dashboard-card">
-
-                <div class="card-label">
-                    PATTERNS DETECTED
-                </div>
-
-                <div class="card-value">
-                    0
-                </div>
-
-            </div>
-            """,
+<div class="dashboard-card">
+<div class="card-label">PATTERNS DETECTED</div>
+<div class="card-value">0</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
@@ -1047,47 +1154,40 @@ else:
 
         st.markdown(
             """
-            <div class="dashboard-card">
-
-                <div class="card-label">
-                    DEFENSE MODE
-                </div>
-
-                <div class="card-value">
-                    READY
-                </div>
-
-            </div>
-            """,
+<div class="dashboard-card">
+<div class="card-label">DEFENSE MODE</div>
+<div class="card-value">READY</div>
+</div>
+""",
             unsafe_allow_html=True
         )
 
 
 # =========================================================
-# BRANDING FOOTER
+# CREATOR FOOTER
 # =========================================================
 
 st.markdown(
     """
-    <div class="branding-footer">
+<div class="branding-footer">
 
-        <div class="creator-label">
-            ⚙️ CORE SECURITY SYSTEM
-        </div>
+<div class="creator-label">
+⚙️ CORE SECURITY SYSTEM
+</div>
 
-        <div class="creator-label" style="margin-top:15px;">
-            CREATED & DEVELOPED BY
-        </div>
+<div class="creator-label" style="margin-top:15px;">
+CREATED & DEVELOPED BY
+</div>
 
-        <div class="creator-name">
-            ✦ SHRAVANI PATIL ✦
-        </div>
+<div class="creator-name">
+✦ SHRAVANI PATIL ✦
+</div>
 
-        <div class="creator-role">
-            AI SECURITY • LLM MODEL PROTECTION
-        </div>
+<div class="creator-role">
+AI SECURITY • LLM MODEL PROTECTION
+</div>
 
-    </div>
-    """,
+</div>
+""",
     unsafe_allow_html=True
 )
