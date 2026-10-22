@@ -26,7 +26,7 @@ def check_prompt(prompt):
             "This prompt is safe and clean. It is safe to pass this input to the primary LLM model."
         )
 
-# 3. COMPLETE STREAMLIT LIGHT/DARK OVERRIDE & DYNAMIC MOVING NEON BORDER CSS
+# 3. COMPLETE STREAMLIT LIGHT/DARK OVERRIDE & ULTRA-GIANT MOBILE CSS
 dynamic_neon_css = """
 <style>
 /* 1. FORCE COMPLETE JET-BLACK CANVAS ACROSS ALL MODES AND CONTAINERS */
@@ -51,22 +51,33 @@ label, p, span, div[data-testid="stWidgetLabel"] p, .stMarkdown, .stSubheader {
     text-shadow: 0 0 8px rgba(127, 0, 255, 0.6) !important;
 }
 
-/* MAX GIANT HEADING OVERRIDE (Forced 4.5em Ultra Bold) */
+/* 3. ULTRA GIANT TITAN HEADING (Specifically Forced to be Massive on Mobile) */
 .cyber-title {
     background: linear-gradient(90deg, #ff007f, #7f00ff, #ff007f) !important;
     background-size: 200% auto !important;
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     animation: textShine 3s linear infinite !important;
-    font-weight: 900 !important; /* कमाल जाडी (Ultra Bold) */
+    font-weight: 900 !important;
     text-align: center !important;
-    font-size: 4.5em !important; /* महाकाय मोठा आकार */
+    font-size: 2.5rem !important; /* रिस्पॉन्सिव्ह लार्ज फॉन्ट */
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
     letter-spacing: 2px !important;
     filter: drop-shadow(0 4px 25px rgba(127, 0, 255, 0.8)) !important;
     margin-bottom: 5px !important;
     margin-top: 20px !important;
     line-height: 1.1 !important;
     display: block !important;
+    width: 100% !important;
+}
+
+/* स्पेशल मोबाईल स्क्रीन ओव्हरराइड (Forces text to expand on mobile phones) */
+@media (max-width: 768px) {
+    .cyber-title {
+        font-size: 2.8rem !important; /* मोबाईलवर अजून मोठा इफेक्ट */
+        letter-spacing: 1px !important;
+    }
 }
 
 .cyber-sub-text {
@@ -87,13 +98,13 @@ label, p, span, div[data-testid="stWidgetLabel"] p, .stMarkdown, .stSubheader {
     to { background-position: 200% center; }
 }
 
-/* 3. INPUT FIELDS & SELECTBOX INTERNAL WRAPPERS FORCED DARK BACKGROUND */
+/* 4. INPUT FIELDS & SELECTBOX INTERNAL WRAPPERS FORCED DARK BACKGROUND */
 textarea, input[type="text"], div[data-baseweb="select"], div[role="box"], .stTextArea div, .stTextInput div {
     background-color: rgba(12, 8, 22, 0.95) !important;
     color: #ffffff !important;
 }
 
-/* 4. DYNAMIC MOVING LIGHT NEON BORDER ANIMATION FOR COMPONENT CONTAINERS */
+/* 5. DYNAMIC MOVING LIGHT NEON BORDER ANIMATION FOR COMPONENT CONTAINERS */
 textarea, input[type="text"], div[data-baseweb="select"], div.stButton > button {
     border: 2px solid transparent !important;
     border-image: linear-gradient(90deg, #ff007f, #7f00ff, #00ffff, #ff007f) 1 !important;
