@@ -5,6 +5,7 @@ st.set_page_config(
     layout="wide"
 )
 
+
 # =========================
 # DETECTOR LOGIC
 # =========================
@@ -49,308 +50,297 @@ def check_prompt(prompt):
 # CYBER UI CSS
 # =========================
 
-dynamic_neon_css = """
-<style>
+st.markdown(
+    """
+    <style>
 
-/* =========================
-   MAIN BACKGROUND
-   ========================= */
+    /* =========================
+       BACKGROUND
+       ========================= */
 
-.stApp,
-[data-testid="stAppViewContainer"],
-[data-testid="stHeader"] {
-    background:
-        radial-gradient(circle at 15% 20%,
-            rgba(127, 0, 255, 0.18),
-            transparent 28%),
-        radial-gradient(circle at 85% 30%,
-            rgba(255, 0, 127, 0.14),
-            transparent 30%),
-        radial-gradient(circle at 50% 90%,
-            rgba(0, 229, 255, 0.08),
-            transparent 25%),
-        #020204 !important;
-}
-
-
-/* =========================
-   TITLE
-   ========================= */
-
-.cyber-title {
-    text-align: center;
-    margin-top: 25px;
-    margin-bottom: 15px;
-
-    font-size: 5.2em;
-    font-weight: 900;
-    line-height: 1.0;
-    letter-spacing: 5px;
-
-    background: linear-gradient(
-        90deg,
-        #ff007f,
-        #7f00ff,
-        #00e5ff,
-        #ff007f
-    );
-
-    background-size: 250% auto;
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    animation: textShine 3s linear infinite;
-
-    filter:
-        drop-shadow(0 0 8px rgba(127, 0, 255, 0.7))
-        drop-shadow(0 0 18px rgba(255, 0, 127, 0.35));
-}
-
-
-@keyframes textShine {
-    0% {
-        background-position: 0% center;
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stHeader"] {
+        background:
+            radial-gradient(
+                circle at 15% 20%,
+                rgba(127, 0, 255, 0.12),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 85% 30%,
+                rgba(255, 0, 127, 0.09),
+                transparent 30%
+            ),
+            radial-gradient(
+                circle at 50% 90%,
+                rgba(0, 229, 255, 0.05),
+                transparent 25%
+            ),
+            #020204 !important;
     }
 
-    100% {
-        background-position: 250% center;
-    }
-}
 
-
-/* =========================
-   SUB TITLE
-   ========================= */
-
-.cyber-sub-text {
-    text-align: center;
-
-    font-size: 1.05em;
-    font-weight: 600;
-
-    background: linear-gradient(
-        90deg,
-        #ff007f,
-        #b000ff,
-        #00e5ff
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    margin-bottom: 35px;
-
-    text-shadow:
-        0 0 8px rgba(127, 0, 255, 0.5);
-}
-
-
-/* =========================
-   SELECT BOX
-   ========================= */
-
-div[data-baseweb="select"] > div {
-    background: #08000f !important;
-
-    border: 1px solid #7f00ff !important;
-
-    border-radius: 10px !important;
-
-    box-shadow:
-        0 0 8px rgba(127, 0, 255, 0.5),
-        inset 0 0 10px rgba(127, 0, 255, 0.08) !important;
-
-    color: white !important;
-}
-
-
-/* =========================
-   PROMPT TEXT AREA
-   STEADY NEON BORDER
-   ========================= */
-
-div[data-testid="stTextArea"] {
-    background: #08000f !important;
-
-    border: 2px solid #b000ff !important;
-
-    border-radius: 15px !important;
-
-    box-shadow:
-        0 0 6px rgba(255, 0, 127, 0.75),
-        0 0 15px rgba(127, 0, 255, 0.65),
-        0 0 28px rgba(127, 0, 255, 0.25) !important;
-
-    padding: 3px !important;
-
-    /* IMPORTANT:
-       No animation
-       No rotation
-       Box remains completely steady
-    */
-}
-
-
-/* Actual textarea */
-
-div[data-testid="stTextArea"] textarea {
-    background: #08000f !important;
-
-    color: #ffffff !important;
-
-    border: none !important;
-
-    outline: none !important;
-
-    box-shadow: none !important;
-
-    border-radius: 12px !important;
-
-    font-size: 16px !important;
-}
-
-
-/* Placeholder */
-
-div[data-testid="stTextArea"] textarea::placeholder {
-    color: #9b8fa8 !important;
-}
-
-
-/* =========================
-   TEXT INPUT
-   ========================= */
-
-div[data-testid="stTextInput"] input {
-    background: #08000f !important;
-
-    color: #ffffff !important;
-
-    border: 1px solid #7f00ff !important;
-
-    border-radius: 10px !important;
-
-    box-shadow:
-        0 0 8px rgba(127, 0, 255, 0.45) !important;
-}
-
-
-/* =========================
-   ANALYSIS TEXT AREA
-   ========================= */
-
-div[data-testid="stTextArea"] textarea[disabled] {
-    color: #d8cce5 !important;
-
-    opacity: 1 !important;
-}
-
-
-/* =========================
-   BUTTON
-   ========================= */
-
-.stButton > button {
-    width: 100%;
-
-    background: #08000f !important;
-
-    color: #ff4da6 !important;
-
-    border: 2px solid #ff007f !important;
-
-    border-radius: 10px !important;
-
-    font-weight: 800 !important;
-
-    letter-spacing: 1px !important;
-
-    box-shadow:
-        0 0 8px rgba(255, 0, 127, 0.65),
-        0 0 18px rgba(127, 0, 255, 0.35) !important;
-
-    transition: 0.25s ease;
-}
-
-
-.stButton > button:hover {
-    background: #170020 !important;
-
-    color: #ffffff !important;
-
-    border-color: #7f00ff !important;
-
-    box-shadow:
-        0 0 12px rgba(255, 0, 127, 0.8),
-        0 0 25px rgba(127, 0, 255, 0.65) !important;
-}
-
-
-/* =========================
-   LABELS
-   ========================= */
-
-label {
-    color: #d9c8e8 !important;
-
-    font-weight: 600 !important;
-}
-
-
-/* =========================
-   FOOTER
-   ========================= */
-
-.branding-footer {
-    text-align: center;
-
-    margin-top: 45px;
-
-    color: #9d91a8;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-}
-
-
-.branding-name {
-    color: #ffd700 !important;
-
-    font-weight: 700;
-
-    text-shadow:
-        0 0 8px rgba(255, 215, 0, 0.8),
-        0 0 18px rgba(255, 180, 0, 0.5);
-}
-
-
-/* =========================
-   MOBILE
-   ========================= */
-
-@media (max-width: 768px) {
+    /* =========================
+       MAIN HEADING
+       ========================= */
 
     .cyber-title {
-        font-size: 3.2em;
+        text-align: center;
 
-        letter-spacing: 3px;
+        margin-top: 25px;
+        margin-bottom: 15px;
 
-        margin-top: 15px;
+        font-size: 5.2em;
+        font-weight: 900;
+        line-height: 1.0;
+        letter-spacing: 5px;
+
+        background: linear-gradient(
+            90deg,
+            #ff007f,
+            #7f00ff,
+            #00e5ff,
+            #ff007f
+        );
+
+        background-size: 250% auto;
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        animation: textShine 3s linear infinite;
+
+        filter:
+            drop-shadow(0 0 5px rgba(127, 0, 255, 0.40));
     }
+
+
+    @keyframes textShine {
+        0% {
+            background-position: 0% center;
+        }
+
+        100% {
+            background-position: 250% center;
+        }
+    }
+
+
+    /* =========================
+       SUBTITLE
+       ========================= */
 
     .cyber-sub-text {
-        font-size: 0.9em;
+        text-align: center;
 
-        padding: 0 10px;
+        font-size: 1.05em;
+        font-weight: 600;
+
+        background: linear-gradient(
+            90deg,
+            #ff007f,
+            #b000ff,
+            #00e5ff
+        );
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        margin-bottom: 35px;
     }
-}
 
-</style>
-"""
 
-st.markdown(dynamic_neon_css, unsafe_allow_html=True)
+    /* =========================
+       SELECT BOX
+       ========================= */
+
+    div[data-baseweb="select"] > div {
+        background: #08000f !important;
+
+        border: 1px solid #6420a0 !important;
+
+        border-radius: 10px !important;
+
+        box-shadow:
+            0 0 5px rgba(127, 0, 255, 0.25) !important;
+
+        color: white !important;
+    }
+
+
+    /* =========================
+       PROMPT BOX
+       STEADY + SOFT NEON
+       ========================= */
+
+    div[data-testid="stTextArea"] {
+        background: #08000f !important;
+
+        border: 2px solid #8b28b8 !important;
+
+        border-radius: 15px !important;
+
+        box-shadow:
+            0 0 5px rgba(255, 0, 127, 0.35),
+            0 0 10px rgba(127, 0, 255, 0.25) !important;
+
+        padding: 3px !important;
+    }
+
+
+    div[data-testid="stTextArea"] textarea {
+        background: #08000f !important;
+
+        color: #ffffff !important;
+
+        border: none !important;
+
+        outline: none !important;
+
+        box-shadow: none !important;
+
+        border-radius: 12px !important;
+
+        font-size: 16px !important;
+    }
+
+
+    div[data-testid="stTextArea"] textarea::placeholder {
+        color: #91869d !important;
+    }
+
+
+    /* =========================
+       TEXT INPUT
+       ========================= */
+
+    div[data-testid="stTextInput"] input {
+        background: #08000f !important;
+
+        color: #ffffff !important;
+
+        border: 1px solid #6420a0 !important;
+
+        border-radius: 10px !important;
+
+        box-shadow:
+            0 0 5px rgba(127, 0, 255, 0.25) !important;
+    }
+
+
+    /* =========================
+       DISABLED ANALYSIS
+       ========================= */
+
+    div[data-testid="stTextArea"] textarea[disabled] {
+        color: #d8cce5 !important;
+
+        opacity: 1 !important;
+    }
+
+
+    /* =========================
+       BUTTON
+       ========================= */
+
+    .stButton > button {
+        width: 100%;
+
+        background: #08000f !important;
+
+        color: #ff4da6 !important;
+
+        border: 2px solid #c22b78 !important;
+
+        border-radius: 10px !important;
+
+        font-weight: 800 !important;
+
+        letter-spacing: 1px !important;
+
+        box-shadow:
+            0 0 6px rgba(255, 0, 127, 0.35) !important;
+
+        transition: 0.25s ease;
+    }
+
+
+    .stButton > button:hover {
+        background: #140019 !important;
+
+        color: #ffffff !important;
+
+        border-color: #8b28b8 !important;
+
+        box-shadow:
+            0 0 10px rgba(127, 0, 255, 0.45) !important;
+    }
+
+
+    /* =========================
+       LABELS
+       ========================= */
+
+    label {
+        color: #d9c8e8 !important;
+
+        font-weight: 600 !important;
+    }
+
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    .branding-footer {
+        text-align: center;
+
+        margin-top: 45px;
+
+        color: #8f8499;
+
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    .branding-name {
+        color: #ffd700 !important;
+
+        font-weight: 700;
+
+        text-shadow:
+            0 0 5px rgba(255, 215, 0, 0.55);
+    }
+
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 768px) {
+
+        .cyber-title {
+            font-size: 3.2em;
+
+            letter-spacing: 3px;
+
+            margin-top: 15px;
+        }
+
+        .cyber-sub-text {
+            font-size: 0.9em;
+
+            padding: 0 10px;
+        }
+    }
+
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # =========================
