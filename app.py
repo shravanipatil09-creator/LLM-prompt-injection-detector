@@ -39,12 +39,14 @@ def check_prompt(prompt):
     ]
 
     if found_keywords:
+
         return (
             "RISK DETECTED [HIGH RISK]",
             f"Prompt blocked! The system detected malicious keywords trying to hijack the LLM: {', '.join(found_keywords)}"
         )
 
     else:
+
         return (
             "SAFE [VERIFIED]",
             "This prompt is safe and clean. It is safe to pass this input to the primary LLM model."
@@ -52,7 +54,7 @@ def check_prompt(prompt):
 
 
 # =========================================================
-# 3. DYNAMIC SHIFTING JET-BLACK & NEON CSS
+# 3. DYNAMIC NEON CSS
 # =========================================================
 
 dynamic_neon_css = """
@@ -104,7 +106,7 @@ dynamic_neon_css = """
 
 
 /* =====================================================
-   HEADER TEXT SHINE
+   BIG 4-LINE CYBER HEADING
    ===================================================== */
 
 .cyber-title {
@@ -114,32 +116,50 @@ dynamic_neon_css = """
             90deg,
             #ff007f,
             #7f00ff,
+            #00e5ff,
             #ff007f
         );
 
-    background-size: 200% auto;
+    background-size: 250% auto;
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
     animation: textShine 3s linear infinite;
 
-    font-weight: 800 !important;
+    font-weight: 900 !important;
 
     text-align: center;
 
-    font-size: 3em !important;
+    font-size: 5.2em !important;
 
-    letter-spacing: 1.5px;
+    line-height: 1.0 !important;
+
+    letter-spacing: 5px;
 
     filter:
         drop-shadow(
-            0 4px 20px rgba(127, 0, 255, 0.6)
+            0 4px 25px rgba(127, 0, 255, 0.7)
         );
 
-    margin-bottom: 2px !important;
+    margin-top: 5px !important;
+
+    margin-bottom: 15px !important;
 }
 
+
+@keyframes textShine {
+
+    to {
+        background-position: 200% center;
+    }
+
+}
+
+
+/* =====================================================
+   SUBTITLE
+   ===================================================== */
 
 .cyber-sub-text {
 
@@ -175,24 +195,9 @@ dynamic_neon_css = """
 }
 
 
-@keyframes textShine {
-
-    to {
-        background-position: 200% center;
-    }
-
-}
-
-
 /* =====================================================
    PROMPT BOX - ROTATING NEON LIGHT
    ===================================================== */
-
-/*
-   IMPORTANT:
-   Prompt box chya border var bright light
-   continuously clockwise firte.
-*/
 
 div[data-testid="stTextArea"] {
 
@@ -207,15 +212,11 @@ div[data-testid="stTextArea"] {
             from 0deg,
             #12001f,
             #12001f,
-            #12001f,
-            #12001f,
-            #ff007f,
             #ff007f,
             #7f00ff,
             #00e5ff,
             #7f00ff,
             #ff007f,
-            #12001f,
             #12001f,
             #12001f
         ) !important;
@@ -226,88 +227,47 @@ div[data-testid="stTextArea"] {
         rotatingBorder 2.8s linear infinite;
 
     box-shadow:
-        0 0 12px rgba(255, 0, 127, 0.35),
-        0 0 25px rgba(127, 0, 255, 0.25);
+        0 0 12px rgba(255, 0, 127, 0.4),
+        0 0 25px rgba(127, 0, 255, 0.3);
 
     overflow: hidden !important;
 }
 
 
 /* =====================================================
-   ROTATING BORDER ANIMATION
+   ROTATING LIGHT
    ===================================================== */
 
 @keyframes rotatingBorder {
 
     0% {
-        background:
-            conic-gradient(
-                from 0deg,
-                #ff007f,
-                #7f00ff,
-                #00e5ff,
-                #12001f,
-                #12001f,
-                #12001f
-            );
-    }
-
-    25% {
-        background:
-            conic-gradient(
-                from 90deg,
-                #ff007f,
-                #7f00ff,
-                #00e5ff,
-                #12001f,
-                #12001f,
-                #12001f
-            );
-    }
-
-    50% {
-        background:
-            conic-gradient(
-                from 180deg,
-                #ff007f,
-                #7f00ff,
-                #00e5ff,
-                #12001f,
-                #12001f,
-                #12001f
-            );
-    }
-
-    75% {
-        background:
-            conic-gradient(
-                from 270deg,
-                #ff007f,
-                #7f00ff,
-                #00e5ff,
-                #12001f,
-                #12001f,
-                #12001f
-            );
+        transform: rotate(0deg);
     }
 
     100% {
-        background:
-            conic-gradient(
-                from 360deg,
-                #ff007f,
-                #7f00ff,
-                #00e5ff,
-                #12001f,
-                #12001f,
-                #12001f
-            );
+        transform: rotate(360deg);
     }
+
 }
 
 
 /* =====================================================
-   ACTUAL TEXTAREA
+   KEEP TEXTAREA STRAIGHT WHILE BORDER ROTATES
+   ===================================================== */
+
+div[data-testid="stTextArea"] > div {
+
+    background: #08000f !important;
+
+    border-radius: 12px !important;
+
+    transform: rotate(0deg);
+
+}
+
+
+/* =====================================================
+   TEXTAREA
    ===================================================== */
 
 div[data-testid="stTextArea"] textarea {
@@ -327,45 +287,19 @@ div[data-testid="stTextArea"] textarea {
     box-shadow:
         none !important;
 
-    position:
-        relative !important;
-
-    z-index:
-        2 !important;
-}
-
-
-/* =====================================================
-   TEXTAREA FOCUS
-   ===================================================== */
-
-div[data-testid="stTextArea"] textarea:focus {
-
-    border:
-        none !important;
-
     outline:
         none !important;
-
-    box-shadow:
-        none !important;
 }
 
 
 /* =====================================================
-   LABEL
+   TEXTAREA LABEL
    ===================================================== */
 
 div[data-testid="stTextArea"] label {
 
     color:
         #ffffff !important;
-
-    position:
-        relative !important;
-
-    z-index:
-        3 !important;
 }
 
 
@@ -392,15 +326,31 @@ input[type="text"] {
 }
 
 
-textarea {
+/* =====================================================
+   SELECT BOX
+   ===================================================== */
+
+div[data-baseweb="select"] > div {
+
+    background-color:
+        rgba(12, 8, 22, 0.95) !important;
 
     color:
         #ffffff !important;
+
+    border:
+        1.5px solid rgba(127, 0, 255, 0.5) !important;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.8) !important;
+
+    border-radius:
+        12px !important;
 }
 
 
 /* =====================================================
-   INTERCEPTOR BUTTON
+   BUTTON
    ===================================================== */
 
 div.stButton > button {
@@ -451,30 +401,7 @@ div.stButton > button:hover {
 
 
 /* =====================================================
-   SELECT BOX
-   ===================================================== */
-
-div[data-baseweb="select"] > div {
-
-    background-color:
-        rgba(12, 8, 22, 0.95) !important;
-
-    color:
-        #ffffff !important;
-
-    border:
-        1.5px solid rgba(127, 0, 255, 0.5) !important;
-
-    box-shadow:
-        0 4px 20px rgba(0, 0, 0, 0.8) !important;
-
-    border-radius:
-        12px !important;
-}
-
-
-/* =====================================================
-   CORE SYSTEM SIGNATURE FOOTER
+   FOOTER
    ===================================================== */
 
 .branding-footer {
@@ -511,7 +438,8 @@ div[data-baseweb="select"] > div {
         700 !important;
 
     text-shadow:
-        0 0 8px rgba(255, 215, 0, 0.5);
+        0 0 8px rgba(255, 215, 0, 0.8),
+        0 0 18px rgba(255, 180, 0, 0.5);
 }
 
 
@@ -524,10 +452,13 @@ div[data-baseweb="select"] > div {
     .cyber-title {
 
         font-size:
-            2em !important;
+            3.2em !important;
 
         line-height:
-            1.15 !important;
+            1.05 !important;
+
+        letter-spacing:
+            3px !important;
 
     }
 
@@ -558,12 +489,24 @@ st.markdown(
 # =========================================================
 
 st.markdown(
-    '<h1 class="cyber-title">🛡️ LLM Prompt Injection Detector</h1>',
+    """
+    <div class="cyber-title">
+        🛡️ LLM<br>
+        PROMPT<br>
+        INJECTION<br>
+        DETECTOR
+    </div>
+    """,
     unsafe_allow_html=True
 )
 
 st.markdown(
-    '<p class="cyber-sub-text">⚡ Cyber Shield Mode: Defending enterprise Large Language Models against alignment hijacking in real-time.</p>',
+    """
+    <p class="cyber-sub-text">
+        ⚡ Cyber Shield Mode: Defending enterprise Large Language Models
+        against alignment hijacking in real-time.
+    </p>
+    """,
     unsafe_allow_html=True
 )
 
@@ -584,7 +527,7 @@ preset_option = st.selectbox(
 
 
 # =========================================================
-# ROUTE STATE CONDITIONS
+# DEFAULT TEXT
 # =========================================================
 
 default_text = (
@@ -664,12 +607,12 @@ with col2:
 
 st.markdown(
     """
-<p class='branding-footer'>
-⚙️ Core Security System<br>
-Created by
-<span class='branding-name'>Shravani Patil</span><br>
-LLM Model Protection
-</p>
-""",
+    <p class='branding-footer'>
+        ⚙️ Core Security System<br>
+        Created by
+        <span class='branding-name'>Shravani Patil</span><br>
+        LLM Model Protection
+    </p>
+    """,
     unsafe_allow_html=True
 )
